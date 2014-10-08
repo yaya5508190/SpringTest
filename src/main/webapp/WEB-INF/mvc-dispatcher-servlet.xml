@@ -1,0 +1,39 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <context:component-scan base-package="com.springapp.mvc"/>
+<!--
+    使用了mvc:resources如果不用annotation-driven 会导致其他controller的mapping 无效
+    <mvc:resources> requires <mvc:annotation-driven> (or explicitly declared handler mappings, etc).
+    This happens because DispatcherServlet applies default configuration of handler mappings only when no custom handler mappings found in the context.
+    Since <mvc:resources> adds its own handler mapping, defaults are broken, therefore other handler mappings should be decalred explicitly,
+    either by <mvc:annotation-driven> or manually as beans.
+    Also note that <mvc:resources> declares only DefaultAnnotationHandlerMapping and doesn't declare other mappings such as BeanNameUrlHandlerMapping,
+    though they are in defaults of DispatcherServlet. Declare them manually if you need them.
+-->
+    <mvc:annotation-driven/>
+    <mvc:resources location="/WEB-INF/theme/" mapping="/theme/**"/>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <bean class="org.springframework.ui.context.support.ResourceBundleThemeSource" name="themeSource">
+        <property name="basenamePrefix" value="theme."></property>
+    </bean>
+    <bean class="org.springframework.web.servlet.theme.SessionThemeResolver" name="themeResolver">
+        <property name="defaultThemeName" value="red"></property>
+    </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3153516900">
+    <data-source source="LOCAL" name="Oracle - dbserver@192.168.1.7" read-only="true" uuid="e45bcba8-ae85-4270-8a14-c7428ddf9fef">
+      <driver-ref>oracle</driver-ref>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@//192.168.1.7:1521/dbserver</jdbc-url>
+      <user-name>qtpay</user-name>
+      <user-password>dfcbdfcbdfcbdf9bdf9bdf9b</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
